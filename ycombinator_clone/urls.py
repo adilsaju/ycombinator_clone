@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from main_site import views
 # from . import views
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
@@ -25,4 +26,5 @@ urlpatterns = [
     path('home/', views.index), 
     # path('', home.views.index, name='index'),
     # path('sets', )
+    path('accounts/login/', auth_views.LoginView.as_view()),
 ]

@@ -1,2 +1,93 @@
-hello world
-{{avril}}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hacker News</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style>
+       body { padding-top: 40px; }
+@media screen and (max-width: 768px) {
+    body { padding-top: 0px; }
+}
+        </style>
+</head>
+
+<body>
+    <!-- Grey with black text -->
+    <!-- <div> -->
+        <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Logout</a>
+            </li>
+        
+          </ul>
+        </nav>
+    <!-- </div> -->
+    <div class="jumbotron" >
+        <h1>Hacker News</h1>
+        <p>Ripoff of https://news.ycombinator.com/</p>
+    </div>
+    <div class="container">
+        <ul id="news_items" class="list-group">
+            {% for item in news_items reversed %}
+            <li class="list-group-item">
+                <div>
+                    <!-- <div class="card"> <div class="card-body"> -->
+                    <h2>Title</h2>
+                    <h3><a href="{{ item.url }}">{{ item.url }}</a></h3>
+                    <p><a href="{{ item.hacker_news_url }}">{{ item.hacker_news_url }}</a></p>
+                    <p>Comments: {{ item.comment_count }}</p>
+                    <p>Upvotes: {{ item.upvote_count }}</p>
+                    <p>{{ item.posted_on }}</p>
+                    <button class="read-button btn">Mark as read</button>
+                    <button class="hide-button btn">Hide</button>
+                    <!-- </div></div> -->
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+<script>
+    items = document.querySelector('#news_items')
+    for (item of items.children) {
+        // console.log(item.querySelector('.read-button'))
+        hideButton = item.querySelector('.hide-button')
+        // console.log(hideButton)
+        hideButton.addEventListener('click', (e) => {
+            e.target.parentElement.parentElement.style.display = 'none'
+        })
+
+        readButton = item.querySelector('.read-button')
+        // console.log(readButton)
+        readButton.addEventListener('click', (e) => {
+            e.target.parentElement.parentElement.style.color = 'grey'
+
+            e.target.parentElement.parentElement.querySelectorAll('a').forEach((each) => {
+                each.style.color = 'grey';
+            })
+        })
+    }
+</script>
+
+</html>
