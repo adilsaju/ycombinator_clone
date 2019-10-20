@@ -4,7 +4,8 @@ from datetime import datetime
 
 
 class NewsItem(models.Model):
-    url = models.CharField(max_length=500, default="")
+    url = models.CharField(max_length=500, default="",unique=True)
+    title = models.CharField(max_length=500, default="")
     hacker_news_url = models.CharField(max_length=500, default="")
     # posted_on = models.DateTimeField(default=datetime.now)
     posted_on = models.CharField(max_length=100,default="")

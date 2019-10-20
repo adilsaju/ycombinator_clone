@@ -23,11 +23,14 @@
             <li class="nav-item active">
               <a class="nav-link" href="#">Home</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" href="#">Login</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="/register">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Logout</a>
+              <a class="nav-link" href="/accounts/logout/?next=/">Logout</a>
             </li>
         
           </ul>
@@ -43,8 +46,13 @@
             <li class="list-group-item">
                 <div>
                     <!-- <div class="card"> <div class="card-body"> -->
-                    <h2>Title</h2>
-                    <h3><a href="{{ item.url }}">{{ item.url }}</a></h3>
+                    <!-- <h2>{{item.title}}</h2> -->
+                                        
+                    <h3><a href="{{ item.url }}">{{item.title}}</a></h3>
+                                            
+                                        
+
+                    <!-- <h3><a href="{{ item.url }}">{{ item.url }}</a></h3> -->
                     <p><a href="{{ item.hacker_news_url }}">{{ item.hacker_news_url }}</a></p>
                     <p>Comments: {{ item.comment_count }}</p>
                     <p>Upvotes: {{ item.upvote_count }}</p>

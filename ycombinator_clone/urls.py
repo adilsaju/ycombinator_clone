@@ -18,13 +18,19 @@ from django.urls import path
 from main_site import views
 # from . import views
 from django.contrib.auth import views as auth_views
-
+# from django.conf.urls import include
+from django.urls import include 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index), 
     path('home/', views.index), 
-    # path('', home.views.index, name='index'),
-    # path('sets', )
-    path('accounts/login/', auth_views.LoginView.as_view()),
+
+    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/login/', auth_views.LoginView.as_view()),
+    path('accounts/logout/', auth_views.LogoutView.as_view()),
+    # path('accounts/logout/', auth_views.LoginView.as_view()),
+    # path('accounts/login/', auth_views.LoginView.as_view(template_name="registration/login.html",redirect_field_name="next")),
+    path('register/', views.register, name='register'),
+    # path(r'^accounts/login$', 'django.contrib.auth.views.login')
 ]
