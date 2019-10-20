@@ -6,6 +6,9 @@ def run():
     import requests
     from main_site.models import NewsItem
 
+    import parsedatetime
+    from datetime import datetime
+
     print("-"*100)
     print("Hackernews parser")
     print("-"*100)
@@ -51,20 +54,37 @@ def run():
     for i in range(3):
         posted_on.append(tr2s[i].select_one('td:nth-of-type(2) > span.age > a').get_text())
 
+    # test=['7 hours ago', '58 minutes ago', '13 hours ago']
+    cal = parsedatetime.Calendar()
+    date_list = []
+    date_db=[]
+    for date_str in posted_on:
+        time_struct, parse_status = cal.parse(date_str)
+        res = datetime(*time_struct[:6])
+        # date_list.append(res)
+        date_db.append(res.strftime('%Y-%m-%d %H:%M:%S'))
+
+    # result = list(reversed([x for _,x in sorted(zip(date_list, posted_on))]))
+    print(posted_on)
+    # print(date_list)
+    print(date_db)
+    # date_list[0].strftime('%Y-%m-%d %H:%M:%S')
+    # print(result)
+
     for i in range(len(url)):
         item,created = NewsItem.objects.get_or_create(url=url[i])
         if created:
             print( 'New item was created')
             item.title=title[i]
             item.hacker_news_url=hacker_news_url[i]
-            item.posted_on=posted_on[i]
+            item.posted_on=date_db[i]
             item.comment_count=comment_count[i]
             item.upvote_count=upvote_count[i]
         else:
             print('updating current item')
             item.title=title[i]
             item.hacker_news_url=hacker_news_url[i]
-            item.posted_on=posted_on[i]
+            item.posted_on=date_db[i]
             item.comment_count=comment_count[i]
             item.upvote_count=upvote_count[i]
 
@@ -78,5 +98,6 @@ def run():
     print(hacker_news_url)
     print(upvote_count)
     print(comment_count)
-    print(posted_on)
+    # print(posted_on)
+    print(date_db)
     # print(links[2].get('href'))

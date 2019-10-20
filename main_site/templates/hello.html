@@ -54,11 +54,18 @@
 
                     <!-- <h3><a href="{{ item.url }}">{{ item.url }}</a></h3> -->
                     <p><a href="{{ item.hacker_news_url }}">{{ item.hacker_news_url }}</a></p>
-                    <p>Comments: {{ item.comment_count }}</p>
+                    <!-- <p>Comments: {{ item.comment_count }}</p>
                     <p>Upvotes: {{ item.upvote_count }}</p>
-                    <p>{{ item.posted_on }}</p>
-                    <button class="read-button btn">Mark as read</button>
-                    <button class="hide-button btn">Hide</button>
+                    <p>{{ item.posted_on }}</p> -->
+                    <p>
+                        <span>{{ item.posted_on }}</span>  |
+                        <span>Comments: {{ item.comment_count }}</span>  |
+                        <span>Upvotes: {{ item.upvote_count }}</span>
+                    </p>
+                    <div>
+                        <button class="read-button btn">Mark as read</button>
+                        <button class="hide-button btn">Hide</button>
+                    </div>
                     <!-- </div></div> -->
                 </div>
             </li>

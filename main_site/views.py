@@ -13,7 +13,7 @@ def index(request):
     # return HttpResponse("You're looking at question")
     # text="i'm just a sk8er boi, she's just a little girl"
     # obj4=NewsItem.objects.get(pk=4)
-    context={'news_items':NewsItem.objects.all()}
+    context={'news_items':NewsItem.objects.all().order_by('posted_on')}
     # for i,v in enumerate(NewsItem.objects.all()):
     #     context[i]=v.url
 
