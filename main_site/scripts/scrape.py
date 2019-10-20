@@ -41,7 +41,11 @@ def run():
 
     comment_count=[]
     for i in range(3):
-        comment_count.append(tr2s[i].select_one('td:nth-of-type(2) > a:nth-of-type(3)').get_text().split()[0])
+        #exception handling
+        if tr2s[i].select_one('td:nth-of-type(2) > a:nth-of-type(3)').get_text() == "discuss":
+            comment_count.append('0')
+        else:
+            comment_count.append(tr2s[i].select_one('td:nth-of-type(2) > a:nth-of-type(3)').get_text().split()[0])
 
     posted_on=[]
     for i in range(3):
@@ -50,36 +54,21 @@ def run():
     for i in range(len(url)):
         item,created = NewsItem.objects.get_or_create(url=url[i])
         if created:
-            print( 'New car was created')
-            # car.slug = 'new-car-slug'
-        else:
-            print('changing current')
+            print( 'New item was created')
             item.title=title[i]
             item.hacker_news_url=hacker_news_url[i]
             item.posted_on=posted_on[i]
             item.comment_count=comment_count[i]
             item.upvote_count=upvote_count[i]
-            # do whatever needs to be done here
-            # with the existing car object, which will
-            # be car
-            # car.name = 'new name'
+        else:
+            print('updating current item')
+            item.title=title[i]
+            item.hacker_news_url=hacker_news_url[i]
+            item.posted_on=posted_on[i]
+            item.comment_count=comment_count[i]
+            item.upvote_count=upvote_count[i]
 
         item.save()
-
-        # for obj in NewsItem.objects.all():
-        #     if url[i] in obj.url:
-        #         print('same')
-        #         # obj.title=title[i]
-        #         # obj.hacker_news_url=hacker_news_url[i]
-        #         # obj.posted_on=posted_on[i]
-        #         # obj.comment_count=comment_count[i]
-        #         # obj.upvote_count=upvote_count[i]
-        #         # obj.save()
-        #         pass
-        #         # NewsItem.objects.get(url=url[i])
-        #     else:
-        #         obj=NewsItem(url=url[i],title=title[i],hacker_news_url=hacker_news_url[i],posted_on=posted_on[i],comment_count=comment_count[i],upvote_count=upvote_count[i])
-        #         obj.save()
         # obj=NewsItem(url=url[i],title=title[i],hacker_news_url=hacker_news_url[i],posted_on=posted_on[i],comment_count=comment_count[i],upvote_count=upvote_count[0])
         # obj.save()
 
