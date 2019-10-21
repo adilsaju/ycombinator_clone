@@ -90,15 +90,16 @@
         hideButton = item.querySelector('.hide-button')
         // console.log(hideButton)
         hideButton.addEventListener('click', (e) => {
-            e.target.parentElement.parentElement.style.display = 'none'
+            e.target.parentElement.parentElement.parentElement.style.display = 'none'
         })
 
         readButton = item.querySelector('.read-button')
         // console.log(readButton)
         readButton.addEventListener('click', (e) => {
-            e.target.parentElement.parentElement.style.color = 'grey'
+            // console.log(e.target.parentElement.parentElement.parentElement)
+            e.target.parentElement.parentElement.parentElement.style.color = 'grey'
 
-            e.target.parentElement.parentElement.querySelectorAll('a').forEach((each) => {
+            e.target.parentElement.parentElement.parentElement.querySelectorAll('a').forEach((each) => {
                 each.style.color = 'grey';
             })
         })
