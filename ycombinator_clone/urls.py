@@ -34,5 +34,9 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     # path(r'^accounts/login$', 'django.contrib.auth.views.login')
     path('hide/<int:news_item_pk>/', views.hide),
+    path('unhide/<int:news_item_pk>/', views.unhide),
     # path('read/<int:news_item_pk>/', views.read),
+            path('about/', views.about),
+         path('add/', views.add),
+         path('hidden/', views.hidden),
 ]

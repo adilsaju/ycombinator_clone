@@ -1,52 +1,15 @@
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hacker News</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-        body {
-            padding-top: 40px;
-        }
-
-        @media screen and (max-width: 768px) {
-            body {
-                padding-top: 0px;
-            }
-        }
-
-        a:visited {
+{% block  content_style%}
+ul#news_items a:visited {
             color: grey;
             background-color: transparent;
             text-decoration: none;
         }
-    </style>
-</head>
+{% endblock  %}
 
-<body>
-    <!-- Grey with black text -->
-    <!-- <div> -->
-    <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
-            </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
-            </li> -->
-            <li class="nav-item">
-                <a class="nav-link" href="/register">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/accounts/logout/?next=/">Logout</a>
-            </li>
+{% block content_body %}
 
-        </ul>
-    </nav>
-    <!-- </div> -->
     <div class="jumbotron">
         <h1>Hacker News</h1>
         <p>Ripoff of https://news.ycombinator.com/</p>
@@ -84,17 +47,12 @@
             {% endfor %}
         </ul>
     </div>
+{% endblock content_body %}
 
-</body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
+
+
+{% block content_script %}
+
 <script>
     window.onload = function () {
 
@@ -156,4 +114,4 @@
 
 </script>
 
-</html>
+{% endblock content_script %}

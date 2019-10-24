@@ -13,7 +13,6 @@ class NewsItem(models.Model):
     upvote_count = models.IntegerField(default=0)
     comment_count = models.IntegerField(default=0)
     # contents=models.TextField(default="")
-    
     users = models.ManyToManyField(User, verbose_name="Readers", related_name="reads")
 
     def __str__(self):              # __unicode__ on Python 2
