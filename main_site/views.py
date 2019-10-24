@@ -41,7 +41,9 @@ def register(request):
     context={'form':form}
     return render(request,'registration/register.html',context) 
     
-
+def hide(request):
+    id=request[0]
+    auth=request[1]
 # def logout_view(request):
 #     logout(request)
 #     return HttpResponse("you're logged out")

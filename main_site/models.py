@@ -11,6 +11,7 @@ class NewsItem(models.Model):
     # posted_on = models.CharField(max_length=100,default="")
     upvote_count = models.IntegerField(default=0)
     comment_count = models.IntegerField(default=0)
+    contents=models.TextField(default="")
 
     def __str__(self):              # __unicode__ on Python 2
         return self.url

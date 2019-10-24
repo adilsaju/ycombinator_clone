@@ -1,5 +1,3 @@
-# python bot that scrapes and organise release changes of mysql
-
 def run():
     # print("Test")
     from bs4 import BeautifulSoup
@@ -13,46 +11,60 @@ def run():
     print("Hackernews parser")
     print("-"*100)
 
-    url="https://news.ycombinator.com/"
+    # url="https://news.ycombinator.com/"
+    urls=["https://news.ycombinator.com/news?p=1","https://news.ycombinator.com/news?p=2","https://news.ycombinator.com/news?p=3"]
     # res=requests.get(url,stream=True)
-    res=requests.get(url)
-    html=res.content
-    soup=BeautifulSoup(html)
-    tr1s=soup.findAll('tr',{'class':'athing'})
+    tr1s=[]
     tr2s=[]
-    for tr1 in tr1s:
-        tr2s.append(tr1.findNextSibling())
-
-
+    for u in urls:
+        res=requests.get(u)
+        html=res.content
+        soup=BeautifulSoup(html)
+        tr1s_tmp=[]
+        tr1s_tmp=soup.findAll('tr',{'class':'athing'})
+        tr1s+=tr1s_tmp
+        for tr1 in tr1s_tmp:
+            tr2s.append(tr1.findNextSibling())
 
     url=[]
-    for i in range(3):
+    title=[]
+    hacker_news_url=[]
+    upvote_count=[]
+    comment_count=[]
+    posted_on=[]
+    for i in range(len(tr1s)):
         url.append(tr1s[i].select_one('td:nth-of-type(3) > a').get('href'))
         
-    title=[]
-    for i in range(3):
+    
         title.append(tr1s[i].select_one('td:nth-of-type(3) > a').get_text())
 
-    hacker_news_url=[]
-    for i in range(3):
+    
         # hacker_news_url.append(tr1s[i].select_one('td:nth-of-type(3) > span > a').get('href'))
-        hacker_news_url.append("https://news.ycombinator.com/"+tr2s[i].select_one('td:nth-of-type(2) > a:nth-of-type(3)').get('href'))
+        # hacker_news_url.append("https://news.ycombinator.com/"+tr2s[i].select_one('td:nth-of-type(2) > a:nth-of-type(3)').get('href'))
+        if tr2s[i].select_one('td:nth-of-type(2) > span.age > a') == None:
+            hacker_news_url.append('')
+        else:
+            hacker_news_url.append("https://news.ycombinator.com/"+tr2s[i].select_one('td:nth-of-type(2) > span.age > a').get('href'))
 
-    upvote_count=[]
-    for i in range(3):
-        upvote_count.append(tr2s[i].select_one('td:nth-of-type(2) > span').get_text().split()[0])
 
-    comment_count=[]
-    for i in range(3):
+        if tr2s[i].select_one('td:nth-of-type(2) > span.score') == None:
+            upvote_count.append('0')
+        else:
+            upvote_count.append(tr2s[i].select_one('td:nth-of-type(2) > span.score').get_text().split()[0])
+
+    
         #exception handling
-        if tr2s[i].select_one('td:nth-of-type(2) > a:nth-of-type(3)').get_text() == "discuss":
+        if tr2s[i].select_one('td:nth-of-type(2) > a:nth-of-type(3)') == None:
+            comment_count.append('0')
+        elif tr2s[i].select_one('td:nth-of-type(2) > a:nth-of-type(3)').get_text() == "discuss":
             comment_count.append('0')
         else:
             comment_count.append(tr2s[i].select_one('td:nth-of-type(2) > a:nth-of-type(3)').get_text().split()[0])
 
-    posted_on=[]
-    for i in range(3):
-        posted_on.append(tr2s[i].select_one('td:nth-of-type(2) > span.age > a').get_text())
+        if tr2s[i].select_one('td:nth-of-type(2) > span.age > a') == None:
+            posted_on.append('')
+        else:
+            posted_on.append(tr2s[i].select_one('td:nth-of-type(2) > span.age > a').get_text())
 
     # test=['7 hours ago', '58 minutes ago', '13 hours ago']
     cal = parsedatetime.Calendar()
