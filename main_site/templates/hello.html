@@ -17,6 +17,12 @@
                 padding-top: 0px;
             }
         }
+
+        a:visited {
+            color: grey;
+            background-color: transparent;
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -65,7 +71,8 @@
                     <p>
                         <span>{{ item.posted_on }}</span> |
                         <span>Comments: {{ item.comment_count }}</span> |
-                        <span>Upvotes: {{ item.upvote_count }}</span>
+                        <span>Upvotes: {{ item.upvote_count }}</span> |
+                        <span>{{ item.id }}</span>
                     </p>
                     <div>
                         <button class="read-button btn">Mark as read</button>
@@ -90,25 +97,58 @@
     crossorigin="anonymous"></script>
 <script>
     window.onload = function () {
-       
+
         items = document.querySelector('#news_items')
         for (item of items.children) {
             // console.log(item.querySelector('.read-button'))
             hideButton = item.querySelector('.hide-button')
             // console.log(hideButton)
+
             hideButton.addEventListener('click', (e) => {
+                pk = e.target.parentElement.parentElement.querySelector("p:nth-child(3) > span:nth-child(4)").innerText
+                fetch(`/hide/${pk}/`, {
+                    method: 'post',
+                    // body: JSON.stringify(opts)
+                }).then(function (response) {
+                    // return response.json();
+                    console.log(`sent hide req for ${pk}`)
+                });
                 e.target.parentElement.parentElement.parentElement.style.display = 'none'
             })
 
             readButton = item.querySelector('.read-button')
             // console.log(readButton)
             readButton.addEventListener('click', (e) => {
-                // console.log(e.target.parentElement.parentElement.parentElement)
-                e.target.parentElement.parentElement.parentElement.style.color = 'grey'
-
+                // pk=e.target.parentElement.parentElement.querySelector("p:nth-child(3) > span:nth-child(4)").innerText
+                // // console.log(e.target.parentElement.parentElement.parentElement)
+                // fetch(`/read/${pk}/`, {
+                //     method: 'post',
+                //     // body: JSON.stringify(opts)
+                // }).then(function (response) {
+                //     // return response.json();
+                //     console.log(`sent read req for ${pk}`)
+                // });
                 e.target.parentElement.parentElement.parentElement.querySelectorAll('a').forEach((each) => {
                     each.style.color = 'grey';
+                    each.style.backgroundColor = 'transparent';
+                    each.style.textDecoration='none'
                 })
+                // desired_url=e.target.parentElement.parentElement.parentElement.querySelector('a:nth-child(1)')
+                // // # store the current URL
+                // current_url = window.location.href
+                // console.log(current_url)
+    
+                // // # use replaceState to push a new entry into the browser's history
+                // // history.replaceState({}, "", desired_url)
+                // history.replaceState(null,null, desired_url)
+
+                // // # use replaceState again to reset the URL
+                // // history.replaceState({}, "", current_url)
+                // history.replaceState(null,null, current_url)
+                e.target.parentElement.parentElement.parentElement.style.color = 'grey'
+                e.target.parentElement.parentElement.parentElement.style.textDecoration='none'
+                e.target.parentElement.parentElement.parentElement.style.backgroundColor = 'transparent';
+                
             })
         }
     }

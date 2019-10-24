@@ -19,12 +19,12 @@ from main_site import views
 # from . import views
 from django.contrib.auth import views as auth_views
 # from django.conf.urls import include
-from django.urls import include 
+from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index), 
-    path('home/', views.index), 
+    path('', views.index),
+    path('home/', views.index),
 
     path('accounts/', include('django.contrib.auth.urls')),
     # path('accounts/login/', auth_views.LoginView.as_view()),
@@ -33,4 +33,6 @@ urlpatterns = [
     # path('accounts/login/', auth_views.LoginView.as_view(template_name="registration/login.html",redirect_field_name="next")),
     path('register/', views.register, name='register'),
     # path(r'^accounts/login$', 'django.contrib.auth.views.login')
+    path('hide/<int:news_item_pk>/', views.hide),
+    # path('read/<int:news_item_pk>/', views.read),
 ]
