@@ -16,8 +16,8 @@ import parsedatetime
 
 @login_required(login_url='/accounts/login')
 def index(request):
-    news=NewsItem.objects.exclude(users=request.user).order_by('posted_on')
-    context={'news_items':news}
+    news=NewsItem.objects.exclude(users=request.user).order_by('-posted_on')
+    context={'news_items':news,'username':request.user}
     # context={'news_items':NewsItem.objects.all().order_by('posted_on')}
     return render(request, "hello.html", context)
 

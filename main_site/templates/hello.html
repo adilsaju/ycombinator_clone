@@ -9,14 +9,15 @@ ul#news_items a:visited {
 {% endblock  %}
 
 {% block content_body %}
-
     <div class="jumbotron">
+    {% comment %} <h1>{{username}}</h1> {% endcomment %}
         <h1>Hacker News</h1>
         <p>Ripoff of https://news.ycombinator.com/</p>
     </div>
     <div class="container">
         <ul id="news_items" class="list-group">
-            {% for item in news_items reversed %}
+            {% comment %} {% for item in news_items reversed %} {% endcomment %}
+            {% for item in news_items %}
             <li class="list-group-item">
                 <div>
                     <!-- <div class="card"> <div class="card-body"> -->
@@ -55,6 +56,7 @@ ul#news_items a:visited {
 
 <script>
     window.onload = function () {
+        document.querySelector("#navbardrop").innerText="{{username}}";
 
         items = document.querySelector('#news_items')
         for (item of items.children) {

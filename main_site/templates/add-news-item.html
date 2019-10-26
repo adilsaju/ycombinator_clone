@@ -1,25 +1,51 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <form action="/add/" method="POST">
-    <label for="url">url</label>
-    <input type="text" name="url"><br>
-    <label for="hackernews_url">hackernews_url</label>
-    <input type="text" name="hackernews_url"><br>
-    <label for="title">title</label>
-    <input type="text" name="title"><br>
-    <label for="upvotes">upvotes(no)</label>
-    <input type="text" name="upvotes"><br>
-    <label for="comments">comments(no)</label>
-    <input type="text" name="comments"><br>
-    <label for="posted_on">posted_on</label>
-    <input type="text" name="posted_on"><br>
-        <input type="submit" value="add">
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content_body %}
+
+<form action="/add/" method="POST">
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="url">url</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="url"><br>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="hackernews_url">hackernews_url</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="hackernews_url"><br>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="title">title</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="title"><br>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="upvotes">upvotes(no)</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="upvotes"><br>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="comments">comments(no)</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="comments"><br>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="posted_on">posted_on</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="posted_on"><br>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">add</button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock content_body %}
